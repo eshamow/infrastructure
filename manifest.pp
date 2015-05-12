@@ -6,9 +6,10 @@ file { ['/proj','/proj/eshamow']:
   ensure => directory,
 }
 vcsrepo { '/proj/eshamow/dotfiles':
-  ensure   => present,
-  provider => git,
-  source   => 'https://github.com/eshamow/dotfiles',
+  ensure     => present,
+  provider   => git,
+  source     => 'https://github.com/eshamow/dotfiles',
+  submodules => false,
 }
 file { '/home/eshamow/.vimrc':
   ensure  => link,
@@ -20,6 +21,4 @@ file { '/home/eshamow/.vim':
   target  => '/proj/eshamow/dotfiles/vim',
   require => Vcsrepo['/proj/eshamow/dotfiles'],
 }
-exec { 'install_docker':
-  command => 'wget -qO- https://get.docker.com/ | sh',
-}
+class { 'docker': }
