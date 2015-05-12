@@ -1,1 +1,6 @@
 .vagrant/
+*.deb
+modules/
+Puppetfile.lock
+.librarian/
+.tmp/
