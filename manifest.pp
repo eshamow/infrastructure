@@ -1,6 +1,6 @@
 package { 'zsh': } ->
 class { 'docker': } ->
-user { 'eshamow':
+user { 'eric':
   ensure => present,
   managehome => true,
   groups     => 'docker',
@@ -8,38 +8,38 @@ user { 'eshamow':
 }
 exec { 'install_oh_my_zsh':
   command => '/usr/bin/curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | /bin/sh',
-  user    => 'eshamow',
-  creates => '/home/eshamow/.oh-my-zsh',
+  user    => 'eric',
+  creates => '/home/eric/.oh-my-zsh',
 }
-file { ['/proj','/proj/eshamow']:
+file { ['/proj','/proj/eric']:
   ensure => directory,
 }
-vcsrepo { '/proj/eshamow/dotfiles':
+vcsrepo { '/proj/eric/dotfiles':
   ensure     => present,
   provider   => git,
-  source     => 'https://github.com/eshamow/dotfiles',
+  source     => 'https://github.com/eric/dotfiles',
   submodules => false,
 }
-file { '/home/eshamow/.vimrc':
+file { '/home/eric/.vimrc':
   ensure  => link,
-  target  => '/proj/eshamow/dotfiles/vimrc',
-  require => [Vcsrepo['/proj/eshamow/dotfiles'], User['eshamow']],
+  target  => '/proj/eric/dotfiles/vimrc',
+  require => [Vcsrepo['/proj/eric/dotfiles'], User['eric']],
 }
-file { '/home/eshamow/.vim':
+file { '/home/eric/.vim':
   ensure  => link,
-  target  => '/proj/eshamow/dotfiles/vim',
-  require => [Vcsrepo['/proj/eshamow/dotfiles'], User['eshamow']],
+  target  => '/proj/eric/dotfiles/vim',
+  require => [Vcsrepo['/proj/eric/dotfiles'], User['eric']],
 }
-file { '/home/eshamow/.ssh':
+file { '/home/eric/.ssh':
   ensure => directory,
-  owner  => 'eshamow',
-  group  => 'eshamow',
+  owner  => 'eric',
+  group  => 'eric',
   mode   => '0600',
 }
-file { '/home/eshamow/.ssh/authorized_keys':
+file { '/home/eric/.ssh/authorized_keys':
   ensure  => file,
-  owner   => 'eshamow',
-  group   => 'eshamow',
+  owner   => 'eric',
+  group   => 'eric',
   mode    => '0400',
   content => 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAuOXYbTgVygIMYoJYTv7g2XhqHGa5KjiQe2V4+SwwPCMM1a2/BuzAb0OETFh4YyQtLbJIC9a6hA0LmmiJZJ0dy81GpMhjCfemCpElS6US7icS9mVzkU7rv+NGH507POw01OBNdmLLiildr7yvk5EEzXWKfch0f+xXnTvgQtq3i99GfFuwk+sKj1iFPKlNrEfeapJbrpd4sPRrxZ7bm5X+Ozdenowwa363aFFQbfbqXA6PUzpMBMtIV1qQ0T+zbUSeJy9s7jZDO4jJESWhKSLC/xHqzaaWomxxciSIoIg1djd8l826aoF5IX6if/6tYGHN41Z2lY2GG4chNUlvz15JdQ== eric@Aimee-Faheys-MacBook-Pro-2.local'
 }
