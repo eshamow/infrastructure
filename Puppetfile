@@ -5,3 +5,4 @@ mod "puppetlabs-vcsrepo",
   :git => 'https://github.com/puppetlabs/puppetlabs-vcsrepo'
 
 mod "garethr-docker"
+mod "petems-swap_file"
