@@ -17,7 +17,7 @@ file { ['/proj','/proj/eric']:
 vcsrepo { '/proj/eric/dotfiles':
   ensure     => present,
   provider   => git,
-  source     => 'https://github.com/eric/dotfiles',
+  source     => 'https://github.com/eshamow/dotfiles',
   submodules => false,
 }
 file { '/home/eric/.vimrc':
