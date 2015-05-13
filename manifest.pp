@@ -49,9 +49,6 @@ swap_file::files { 'default':
 }
 sysctl { 'vm.swappiness': value => '10' }
 sysctl { 'vm.vfs_cache_pressure': value => '50' }
-class { 'rbenv': }
-rbenv::plugin { 'sstephenson/ruby-build': }
-rbenv::build { '2.2.2': global => true }
 cron { 'clean_exited_containers':
   command => 'docker ps -a | grep Exited | awk "{print $1};" | xargs docker rm -f',
   user    => root,
